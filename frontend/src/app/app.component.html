@@ -1,0 +1,7 @@
+<div class="app-container">
+    <mat-progress-bar *ngIf='loading' mode="indeterminate" class="progress"></mat-progress-bar>
+    <router-outlet></router-outlet>
+    <div class='popup error' *ngIf="errorMsg">{{errorMsg}}</div>
+    <div class='popup success' *ngIf="successMsg">{{successMsg}}</div>
+    <button mat-raised-button color='warn' (click)='logout()'>Logout</button>
+</div>
