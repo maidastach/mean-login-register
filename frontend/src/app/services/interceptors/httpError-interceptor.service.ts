@@ -1,7 +1,7 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, throwError } from "rxjs";
+import { throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { ProcessService } from "../processing/process.service";
 
@@ -19,12 +19,10 @@ export class HttpErrorInterceptorService implements HttpInterceptor
                 catchError((error: HttpErrorResponse) => 
                 {
                     console.log(error);
-                    
                     const errorMsg = error.error.message ? error.error.message : 'Server connection error'
                     this.processService.setErroMsg(errorMsg)
                     console.log('interceptor caught an error')
                     this.router.navigate([''])
-                    //error.status for the code, error.error is my error
                     return throwError(error);  
                 })
             )

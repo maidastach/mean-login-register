@@ -8,7 +8,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatExpansionModule } from '@angular/material/expansion'; 
 
 
 @NgModule(
@@ -25,6 +26,8 @@ import { MatTableModule } from '@angular/material/table';
         MatProgressBarModule,
         MatTableModule,
         MatDialogModule,
+        MatCheckboxModule,
+        MatExpansionModule
       ],
     exports: 
       [
@@ -37,6 +40,8 @@ import { MatTableModule } from '@angular/material/table';
         MatProgressBarModule,
         MatTableModule,
         MatDialogModule,
+        MatCheckboxModule,
+        MatExpansionModule
       ]
   }
 )

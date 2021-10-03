@@ -21,7 +21,8 @@ export const login = async(req, res, next) =>
         else
         {
             req.session.user = user._id.toString();
-            res.status(200).send({ success: true, message: 'LOGIN SUCCESSFULL', response: user.user })
+            const flag = user.isAdmin ? 'admin' : 'user'
+            res.status(200).send({ success: true, message: 'LOGIN SUCCESSFULL', response: user.user, flag: flag })
         }
     }
 }
@@ -30,7 +31,7 @@ export const login = async(req, res, next) =>
 export const registerUser = async(req, res, next) => 
 {
     //cryptare password
-    const { fname, user, email, password } = req.body;
+    const { fname, user, email, password, isAdmin } = req.body;
 
     const findUserByEmail = await User.findOne( 
         { email: email }, 
@@ -57,7 +58,7 @@ export const registerUser = async(req, res, next) =>
     else
     {
         const newUser = await User.create(
-            { fname, user, email, password },
+            { fname, user, email, password, isAdmin },
             (err, doc) => 
             {
                 if(err)
@@ -65,7 +66,8 @@ export const registerUser = async(req, res, next) =>
                 else if(doc)
                 {
                     req.session.user = doc._id.toString();
-                    return res.status(200).send({ success: true, message: 'USER Registered' })
+                    const flag = isAdmin ? 'admin' : 'user'
+                    return res.status(200).send({ success: true, message: 'USER Registered', flag: flag })
                 }
             }
         );
@@ -75,6 +77,36 @@ export const registerUser = async(req, res, next) =>
 export const forgotPassword = async(req, res, next) =>
 {
 
+}
+
+export const isAdmin = async(req, res, next) => 
+{
+    const user = req.session.user
+    if(!user)
+        return res.status(401).send({ success: false, message: 'You are not logged in' })
+    else
+    {
+        const findUser = await User.findById(
+            user, 
+            err => 
+            {
+                if(err) 
+                    return next()
+            }
+        )
+        if(!findUser)
+        {
+            req.session.destroy(err => err && next())
+            console.log('session destroyed');
+            return res.status(401).send({ success: false, message: 'You are not logged in' })
+        }
+        
+        
+        if(findUser.isAdmin)
+            return res.send({ success: true, message: 'Admin Autorized' })
+        else
+            return res.send({ success: false, message: 'You do not have Admin Powers' })
+    }
 }
 
 export const isLogged = async(req, res, next) => 

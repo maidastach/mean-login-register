@@ -5,6 +5,7 @@ import session from 'express-session';
 import path from "path";
 import config from './config';
 import AuthRouter from "./routers/AuthRouter";
+import UserRouter from "./routers/UserRouter";
 
 const app = express();
 
@@ -20,6 +21,7 @@ mongoose.connect(
 .catch(error => console.log(error.reason));
 
 app.use('/api/auth', AuthRouter);
+app.use('/api/user', UserRouter);
 
 
 app.use(

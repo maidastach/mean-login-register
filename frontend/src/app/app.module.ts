@@ -6,10 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppService } from './app.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { HttpErrorInterceptorService } from './services/interceptors/httpError-interceptor.service';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { AdminGuard } from './guards/admin/admin.guard';
 
 @NgModule(
   {
@@ -27,8 +27,8 @@ import { AuthGuard } from './guards/auth/auth.guard';
       ],
     providers: 
       [
-        AppService,
         AuthGuard,
+        AdminGuard,
         {
           provide: HTTP_INTERCEPTORS,
           multi: true,

@@ -14,9 +14,14 @@ export class AuthService
     return this.http.post<AuthResponse>('/api/auth/login', user, { withCredentials: true })
   }
 
-  registerAdmin(admin: Register): Observable<AuthResponse>
+  register(user: Register): Observable<AuthResponse>
   {
-    return this.http.post<AuthResponse>('/api/auth/register-admin', admin, { withCredentials: true })
+    return this.http.post<AuthResponse>('/api/auth/register', user, { withCredentials: true })
+  }
+
+  isAdmin(): Observable<AuthResponse>
+  {
+    return this.http.get<AuthResponse>('/api/auth/isadmin', { withCredentials: true })
   }
 
   isLogged(): Observable<AuthResponse>

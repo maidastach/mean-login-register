@@ -1,0 +1,18 @@
+<h1>User Page</h1>
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{user.fname}}
+        </mat-panel-title>
+        <mat-panel-description>
+          Here are your details
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>Your Username: {{user.user}}</p>
+      <p>Your Email: {{user.email}}</p>
+      <p>Admin Powers: {{user.isAdmin ? 'Yes' : 'No'}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+<button mat-raised-button color='warn' (click)='logout()'>Logout</button>
+

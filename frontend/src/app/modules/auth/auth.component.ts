@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthResponse, Login, Register } from 'src/app/Models';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProcessService } from 'src/app/services/processing/process.service';
-import { DialogDataComponent } from '../dialog-data/dialog-data.component';
+import { DialogDataComponent } from './components/dialog-data/dialog-data.component';
 
 
 @Component(
@@ -14,8 +14,8 @@ import { DialogDataComponent } from '../dialog-data/dialog-data.component';
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss']
   }
+)
 
-  )
 export class AuthComponent implements OnInit
 {
   public loading!: boolean;
@@ -23,10 +23,23 @@ export class AuthComponent implements OnInit
   public login!: FormGroup;
   public register!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, public dialog: MatDialog, private processService: ProcessService) { }
+  public divStyle: string = '0%'
+
+  // @ViewChild('loginForm') loginForm: any;
+  // @ViewChild('loginText') loginText: any;
+
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router, 
+    public dialog: MatDialog, 
+    private processService: ProcessService
+  ) { }
 
   ngOnInit(): void
   {
+    setTimeout(() => this.processService.setLoading(false), 1)
+
     this.login = this.fb.group(
       {
         email: ['', [Validators.email, Validators.required]],
@@ -40,9 +53,30 @@ export class AuthComponent implements OnInit
         fname: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]],
-        re_password: ['', [Validators.required, Validators.minLength(8)]]
+        re_password: ['', [Validators.required, Validators.minLength(8)]],
+        isAdmin: [false]
       }
     )
+
+  }
+
+  swapToSignIn(): void
+  {
+    this.divStyle = "0%"
+    // console.log(this.loginForm, this.loginText);
+    
+    // this.loginForm.style.marginLeft = "0%";
+    // this.loginText.style.marginLeft = "0%";
+  }
+
+  swapToSignUp(): void
+  {
+    this.divStyle = "-50%"
+
+    // console.log(this.loginForm, this.loginText);
+
+    // this.loginForm.style.marginLeft = "-50%";
+    // this.loginText.style.marginLeft = "-50%";
   }
 
   swapFormView(event: any): void
@@ -62,7 +96,7 @@ export class AuthComponent implements OnInit
             this.loading = false;
             dialogRef.close()
             this.processService.setSuccessMsg(`Bentornato ${response.response}`)
-            this.router.navigate(['/game'])
+            this.router.navigate([`/${response.flag}`])
           },
           (error: ErrorEvent) =>
           {
@@ -83,15 +117,15 @@ export class AuthComponent implements OnInit
   {
     this.loading = true;
     const dialogRef = this.dialog.open(DialogDataComponent, { data: [this.loading] });
-    const { re_password: remove, ...admin } = form
+    const { re_password: remove, ...user } = form
     this.authService
-      .registerAdmin(admin)
+      .register(user)
         .subscribe(
-          () =>
+          (response: AuthResponse) =>
           {
             this.loading = false;
             dialogRef.close()
-            this.router.navigate(['/game'])
+            this.router.navigate([`/${response.flag}`])
           },
           (error: ErrorEvent) => 
           {

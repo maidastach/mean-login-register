@@ -1,10 +1,9 @@
 export interface User
 {
+    fname: string;
     user: string;
     email: string;
-    password: string;
     isAdmin: boolean;
-    fname: string;
 };
 
 export interface Login
@@ -35,5 +34,19 @@ export interface AuthResponse
     message: string;
     response: any;
     flag: string;
+}
+
+export interface UserResponse
+{
+    success: boolean;
+    message: string;
+    response: User;
+}
+
+export interface UsersResponse
+{
+    success: boolean;
+    message: string;
+    response: User[];
 }
 

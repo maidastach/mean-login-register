@@ -1,0 +1,157 @@
+<!-- <div class="cont">
+    <form class="form sign-in" [formGroup]="login" (submit)='handleLogin(login.value)'>
+        <h2>Welcome Back,</h2>
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>
+                <span>Email</span>   
+            </mat-label>
+            <input matInput type="email" formControlName='email'/>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" floatLabel="always">
+            <mat-label>
+                <span>Password</span>  
+            </mat-label>
+            <input type="password" matInput formControlName='password'/>
+        </mat-form-field>
+        
+        <p class="forgot-pass">Forgot password?</p>
+        
+        <button mat-button type="submit" class="submit" [disabled]='!login.valid'>Accedi</button>
+    
+    </form>
+    
+    <div class="sub-cont">
+        <div class="img">
+            <div class="img__text m--up">
+                <h2>First Time Here?</h2>
+                <p>Join Us now!</p>
+            </div>
+            <div class="img__text m--in">
+                <h2>Already our member?</h2>
+                <p>Sign In to access our services</p>
+            </div>
+            <div class="img__btn" (click)='swapFormView($event)'>
+                <span class="m--up">Register</span>
+                <span class="m--in">Login</span>
+            </div>
+        </div>
+    
+        <form class="form sign-up" [formGroup]="register" (submit)='handleRegister(register.value)'>
+            <h2>Time to join Us,</h2><h2>{{register.value.user}}</h2>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Username</span>
+                </mat-label>
+                <input type="text" matInput formControlName='user'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Full name</span>
+                </mat-label>
+                <input type="text" matInput formControlName='fname'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Email</span>
+                </mat-label>
+                <input type="email" matInput formControlName='email'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Password</span>
+                </mat-label>
+                <input type="password" matInput formControlName='password'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Conferma Password</span>
+                </mat-label>
+                <input type="password" matInput formControlName='re_password'/>
+            </mat-form-field>
+            
+            <mat-checkbox formControlName="isAdmin">Are you Admin?</mat-checkbox>
+
+            <button mat-button ype="submit" class="submit" [disabled]='!register.valid'>Registrati</button>
+
+        </form>
+    </div>
+</div> -->
+
+<div class="wrapper">
+    <div class="title-text">
+      <div [ngStyle]="{'marginLeft': divStyle}" class="title login">Login Form</div>
+      <div class="title signup">Signup Form</div>
+    </div>
+    <div class="form-container">
+      <div class="slide-controls">
+        <input type="radio" name="slide" id="login" checked>
+        <input type="radio" name="slide" id="signup">
+        <label for="login" (click)='swapToSignIn()' class="slide login">Login</label>
+        <label for="signup" (click)='swapToSignUp()' class="slide signup">Signup</label>
+        <div class="slider-tab"></div>
+      </div>
+      <div class="form-inner">
+        <form [ngStyle]="{'marginLeft': divStyle}" class="login" [formGroup]="login" (submit)='handleLogin(login.value)'>
+
+            <mat-form-field appearance="fill" floatLabel="always" class="field">
+                <mat-label>
+                    <span>Email</span>   
+                </mat-label>
+                <input matInput type="email" formControlName='email'/>
+            </mat-form-field>
+            
+            <mat-form-field appearance="fill" floatLabel="always" class="field">
+                <mat-label>
+                    <span>Password</span>  
+                </mat-label>
+                <input type="password" matInput formControlName='password'/>
+            </mat-form-field>
+
+          <div class="pass-link"><a href="#">Forgot password?</a></div>
+          <div class="field btn">
+            <div class="btn-layer"></div>
+            <input type="submit" value="Login" [disabled]='!login.valid'>
+          </div>
+        </form>
+        <form [formGroup]="register" (submit)='handleRegister(register.value)' class="signup">
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Username</span>
+                </mat-label>
+                <input type="text" matInput formControlName='user'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Full name</span>
+                </mat-label>
+                <input type="text" matInput formControlName='fname'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Email</span>
+                </mat-label>
+                <input type="email" matInput formControlName='email'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Password</span>
+                </mat-label>
+                <input type="password" matInput formControlName='password'/>
+            </mat-form-field>
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>
+                    <span>Conferma Password</span>
+                </mat-label>
+                <input type="password" matInput formControlName='re_password'/>
+            </mat-form-field>
+            <mat-checkbox formControlName="isAdmin">Are you Admin?</mat-checkbox>
+          <div class="field btn">
+            <div class="btn-layer"></div>
+            <input type="submit" value="Signup" [disabled]='!register.valid'>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
