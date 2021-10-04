@@ -61,7 +61,6 @@ SESSION_OPTIONS.cookie.secure:
 - SignUp as Admin or User
 - Manage Users Infos
 - Route Guards
-- Recover Password
 
   
 ## Feedback
