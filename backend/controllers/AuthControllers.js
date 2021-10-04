@@ -94,11 +94,6 @@ export const registerUser = async(req, res, next) =>
     }
 }
 
-export const forgotPassword = async(req, res, next) =>
-{
-
-}
-
 export const isAdmin = async(req, res, next) => 
 {
     const user = req.session.user

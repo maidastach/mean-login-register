@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -19,14 +19,9 @@ import { DialogDataComponent } from './components/dialog-data/dialog-data.compon
 export class AuthComponent implements OnInit
 {
   public loading!: boolean;
-
   public login!: FormGroup;
   public register!: FormGroup;
-
   public divStyle: string = '0%'
-
-  // @ViewChild('loginForm') loginForm: any;
-  // @ViewChild('loginText') loginText: any;
 
   constructor(
     private fb: FormBuilder, 
@@ -63,25 +58,11 @@ export class AuthComponent implements OnInit
   swapToSignIn(): void
   {
     this.divStyle = "0%"
-    // console.log(this.loginForm, this.loginText);
-    
-    // this.loginForm.style.marginLeft = "0%";
-    // this.loginText.style.marginLeft = "0%";
   }
 
   swapToSignUp(): void
   {
     this.divStyle = "-50%"
-
-    // console.log(this.loginForm, this.loginText);
-
-    // this.loginForm.style.marginLeft = "-50%";
-    // this.loginText.style.marginLeft = "-50%";
-  }
-
-  swapFormView(event: any): void
-  {
-    event.target.parentElement.parentElement.parentElement.classList.toggle('s--signup');
   }
 
   handleLogin(form: Login)
