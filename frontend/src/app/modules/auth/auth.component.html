@@ -87,7 +87,6 @@
                         <span>Conferma Password</span>
                     </mat-label>
                     <input type="password" matInput formControlName='re_password'/>
-                    {{re_password?.errors | json}}
                     <mat-error *ngIf='re_password?.errors?.mustMatch'>
                         Passwords do not match
                     </mat-error>
