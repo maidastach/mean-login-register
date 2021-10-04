@@ -43,6 +43,18 @@ To run this project, you will need to add the following environment variables to
 
 `SESSION_SECRET`
 
+Check the `secure` cookie option into
+```bash
+  backend/config.js
+```
+SESSION_OPTIONS.cookie.secure:
+```bash
+  set TRUE if in production mode
+```
+```bash
+  set FALSE if in development mode
+```
+
   
 ## Features
 
