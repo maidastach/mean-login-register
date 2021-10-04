@@ -6,6 +6,7 @@ import { AuthResponse, Login, Register } from 'src/app/Models';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProcessService } from 'src/app/services/processing/process.service';
 import { DialogDataComponent } from './components/dialog-data/dialog-data.component';
+import { MustMatch } from './components/validators/password.validator';
 
 
 @Component(
@@ -22,6 +23,7 @@ export class AuthComponent implements OnInit
   public login!: FormGroup;
   public register!: FormGroup;
   public divStyle: string = '0%'
+  public errorPsw!: string;
 
   constructor(
     private fb: FormBuilder, 
@@ -47,12 +49,40 @@ export class AuthComponent implements OnInit
         user: ['', [Validators.required, Validators.minLength(3)]],
         fname: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
-        re_password: ['', [Validators.required, Validators.minLength(8)]],
+        password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/(?=.*[0-9])/)]],
+        re_password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/(?=.*[0-9])/)]],
         isAdmin: [false]
+      },
+      {
+        validator: MustMatch('password', 're_password')
       }
     )
 
+  }
+
+  get user()
+  {
+    return this.register.get('user')
+  }
+
+  get fname()
+  {
+    return this.register.get('fname')
+  }
+
+  get email()
+  {
+    return this.register.get('email')
+  }
+
+  get password()
+  {
+    return this.register.get('password')
+  }
+
+  get re_password()
+  {
+    return this.register.get('re_password')
   }
 
   swapToSignIn(): void

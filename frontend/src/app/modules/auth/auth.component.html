@@ -39,30 +39,58 @@
                         <span>Username</span>
                     </mat-label>
                     <input type="text" matInput formControlName='user'/>
+                    <mat-error *ngIf='user?.errors?.required || user?.errors?.minlength'>
+                        Username must be at leaste 3 characters long
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" floatLabel="always">
                     <mat-label>
                         <span>Full name</span>
                     </mat-label>
                     <input type="text" matInput formControlName='fname'/>
+                    <mat-error *ngIf='fname?.errors?.required || fname?.errors?.minlength'>
+                        Full Name must be at leaste 3 characters long
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" floatLabel="always">
                     <mat-label>
                         <span>Email</span>
                     </mat-label>
                     <input type="email" matInput formControlName='email'/>
+                    <mat-error *ngIf='email?.errors?.required'>
+                        Email is Required
+                    </mat-error>
+                    <mat-error *ngIf='email?.errors?.email'>
+                        Email is not correct
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" floatLabel="always">
                     <mat-label>
                         <span>Password</span>
                     </mat-label>
                     <input type="password" matInput formControlName='password'/>
+                    <mat-error *ngIf='password?.errors?.required'>
+                        Password Required
+                    </mat-error>
+                    <mat-error *ngIf='password?.errors?.minlength && password?.errors?.pattern'>
+                        Password must be at least 8 characters including at least one number
+                    </mat-error>
+                    <mat-error *ngIf='!password?.errors?.minlength && password?.errors?.pattern'>
+                        Password must be include at least one number
+                    </mat-error>
+                    <mat-error *ngIf='password?.errors?.minlength && !password?.errors?.pattern'>
+                        Password must be at least 8 characters
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" floatLabel="always">
                     <mat-label>
                         <span>Conferma Password</span>
                     </mat-label>
                     <input type="password" matInput formControlName='re_password'/>
+                    {{re_password?.errors | json}}
+                    <mat-error *ngIf='re_password?.errors?.mustMatch'>
+                        Passwords do not match
+                    </mat-error>
                 </mat-form-field>
                 <mat-checkbox formControlName="isAdmin">Are you Admin?</mat-checkbox>
                 <div class="field btn">
