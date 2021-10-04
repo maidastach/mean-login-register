@@ -19,11 +19,11 @@ export default
             cookie:
                 {
                     maxAge: 2 * 24 * 60 * 60 * 1000,
-                    secure: false,
+                    secure: true,
                     httpOnly: true,
                 },
             saveUninitialized: false,
-            secret: 'secretTemporary',
+            secret: process.env.SESSION_SECRET,
             store: MongoStore.create( { mongoUrl: process.env.MONGODB_URL } ),
             resave: false,
         }

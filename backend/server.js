@@ -18,7 +18,7 @@ mongoose.connect(
     config.MONGODB_CONFIG
 )
 .then(() => console.log('MongoDB Connected'))
-.catch(error => console.log(error.reason));
+.catch(error => console.log(error));
 
 app.use('/api/auth', AuthRouter);
 app.use('/api/user', UserRouter);
@@ -32,10 +32,10 @@ app.use(
     }
 );
 
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist', 'login-app')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.get(
     '*', 
-    (req, res) => res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'login-app', 'index.html'))
+    (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html'))
 );
 
 app.listen(
